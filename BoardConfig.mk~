@@ -1,0 +1,83 @@
+TARGET_OTA_ASSERT_DEVICE := a5,a5dug,a5dwg,a5chl,a5ul
+
+# Bootloader
+BOARD_VENDOR := htc
+TARGET_BOOTLOADER_NAME := msm8226
+TARGET_BOOTLOADER_BOARD_NAME := MSM8226
+TARGET_NO_BOOTLOADER := true
+
+# CPU
+TARGET_ARCH := arm
+TARGET_CPU_ABI := armeabi-v7a
+TARGET_CPU_ABI2 := armeabi
+TARGET_ARCH_VARIANT := armv7-a-neon
+ARCH_ARM_HAVE_ARMV7A := true
+TARGET_CPU_VARIANT := krait
+ARCH_ARM_HAVE_NEON := true
+TARGET_CPU_SMP := true
+ARCH_ARM_HAVE_TLS_REGISTER := true
+
+# Platform
+TARGET_BOARD_PLATFORM := msm8226
+TARGET_NO_RADIOIMAGE := true
+TARGET_BOARD_PLATFORM_GPU := qcom-adreno305
+
+# Init
+TARGET_NO_INITLOGO := true
+
+
+# Kernel
+TARGET_PREBUILT_KERNEL := device/htc/a5/kernel
+BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=qcom user_debug=30 ehci-hcd.park=3
+BOARD_KERNEL_BASE := 0x00000000
+BOARD_KERNEL_PAGESIZE := 2048
+BOARD_KERNEL_SEPARATED_DT := true
+BOARD_MKBOOTIMG_ARGS := --dt device/htc/a5/dt.img --ramdisk_offset 0x02000000 --tags_offset 0x01e00000
+
+# Kernel
+BOARD_BOOTIMAGE_PARTITION_SIZE := 16777216            #16M  boot
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 16777216        #16M  recovery
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2684354560         #1.5G system
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 4429185024      #2.5G data
+BOARD_FLASH_BLOCK_SIZE := 131072
+
+
+
+# Recovery
+BOARD_HAS_NO_SELECT_BUTTON := true
+BOARD_SUPPRESS_EMMC_WIPE := true
+BOARD_HAS_LARGE_FILESYSTEM := true
+TARGET_USERIMAGES_USE_EXT4 := true
+
+BOARD_RECOVERY_HANDLES_MOUNT := true
+BOARD_USES_MMCUTILS := true
+
+
+
+BOARD_RECOVERY_SWIPE := true
+
+TARGET_RECOVERY_FSTAB := device/htc/a5/twrp.fstab
+TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
+BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_23x41.h\"
+
+
+# TWRP
+
+DEVICE_RESOLUTION := 1080x1920
+RECOVERY_GRAPHICS_USE_LINELENGTH := true
+TW_FLASH_FROM_STORAGE := true #此项打开可以允许从当前位置读取zip卡刷包来刷入，如果不配置则会把卡刷包读取到/tmp后再刷入，因为/tmp是虚拟内存，这样的话，大的卡刷包可能造会造成内存不足而无法刷入
+BOARD_HAS_NO_REAL_SDCARD := false #此项打开后可关闭分区功能
+#RECOVERY_SDCARD_ON_DATA := true #是否合并分区
+#TW_INCLUDE_CRYPTO := true #使用加密
+TW_NO_USB_STORAGE := false #是否不使用大容量存储
+TW_INTERNAL_STORAGE_PATH := "/data/media"
+TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
+PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
+
+
+TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
+TW_MAX_BRIGHTNESS := 100
+
+# USB Mounting
+TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/msm_dwc3/f9200000.dwc3/gadget/lun%d/file
+
